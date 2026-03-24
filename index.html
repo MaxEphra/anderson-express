@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anderson Express - Entregas Rápidas e Seguras</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #d32f2f;
+            --primary-dark: #b71c1c;
+            --secondary: #212121;
+            --light: #f5f5f5;
+            --whatsapp: #25D366;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--secondary);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-wpp {
+            background-color: var(--whatsapp);
+        }
+
+        .btn-wpp:hover {
+            background-color: #128C7E;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(33,33,33,0.95);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero */
+        #hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 1rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+
+        /* Sobre */
+        #sobre {
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+            margin: 0.5rem auto;
+        }
+
+        .sobre-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .sobre-text {
+            flex: 1;
+        }
+
+        .sobre-image {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .sobre-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Serviços */
+        #servicos {
+            background-color: #f9f9f9;
+        }
+
+        .servicos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .servico-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .servico-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .servico-icon {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 2.5rem;
+        }
+
+        .servico-content {
+            padding: 1.5rem;
+        }
+
+        /* Frota */
+        #frota {
+            background-color: white;
+        }
+
+        .frota-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .frota-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .frota-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .frota-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .frota-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .frota-card:hover .frota-image img {
+            transform: scale(1.1);
+        }
+
+        .frota-content {
+            padding: 1.5rem;
+        }
+
+        /* Diferenciais */
+        #diferenciais {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-align: center;
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .diferenciais-content h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .diferenciais-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .diferenciais-content .btn {
+            background-color: white;
+            color: var(--primary);
+            font-size: 1.1rem;
+            padding: 1rem 2rem;
+        }
+
+        /* Contato */
+        #contato {
+            background-color: #f9f9f9;
+        }
+
+        .contato-content {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .contato-info {
+            flex: 1;
+        }
+
+        .contato-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contato-icon {
+            background-color: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .contato-form {
+            flex: 1;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-status {
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            display: none;
+            text-align: center;
+        }
+
+        .form-status.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .form-status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo span {
+            color: var(--primary);
+        }
+
+        .footer-links h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .footer-links h3::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary);
+            margin-top: 0.5rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--primary);
+        }
+
+        .footer-whatsapp a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--whatsapp);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .footer-whatsapp a:hover {
+            transform: scale(1.02);
+            background-color: #128C7E;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bbb;
+        }
+
+        /* Botão flutuante WhatsApp */
+        .floating-wpp {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            background-color: var(--whatsapp);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .floating-wpp i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .floating-wpp:hover {
+            transform: scale(1.1);
+            background-color: #128C7E;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .hero-content h1 { font-size: 2.8rem; }
+            .sobre-content { flex-direction: column; }
+            .contato-content { flex-direction: column; }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            nav {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--secondary);
+                padding: 1rem 0;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+            }
+            nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav ul li { margin: 0.8rem 0; }
+            .hero-content h1 { font-size: 2.2rem; }
+            section { padding: 3rem 0; }
+        }
+
+        @media (max-width: 576px) {
+            .hero-content h1 { font-size: 1.8rem; }
+            .diferenciais-content h2 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">Anderson <span>Express</span></div>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#hero">Início</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#frota">Frota</a></li>
+                    <li><a href="#diferenciais">Diferenciais</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section id="hero">
+        <div class="video-background">
+            <video autoplay muted loop>
+                <source src="https://cdn.pixabay.com/video/2024/05/25/213622_tiny.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <h1>RÁPIDO E SEGURO!<br>Anderson Express</h1>
+            <h3>Entregas rápidas • Documentos e encomendas • Coletas e delivery</h3>
+            <br>
+            <a href="https://wa.me/5511954429758?text=Olá!%20Gostaria%20de%20solicitar%20uma%20entrega%20ou%20saber%20mais%20sobre%20os%20serviços." class="btn btn-wpp"><i class="fab fa-whatsapp"></i> Solicite sua Entrega no WhatsApp</a>
+        </div>
+    </section>
+
+    <!-- Sobre -->
+    <section id="sobre">
+        <div class="container">
+            <h2 class="section-title">Sobre Nós</h2>
+            <div class="sobre-content">
+                <div class="sobre-text">
+                    <p>A <strong>Anderson Express</strong> é referência em entregas rápidas e seguras em toda a região. Atuamos com compromisso e agilidade para levar seus documentos e encomendas com total confiabilidade.</p>
+                    <p>Oferecemos serviços de coletas, delivery e logística expressa, sempre com foco na satisfação do cliente. Nosso atendimento é personalizado e nossa equipe está preparada para atender desde pequenas demandas até necessidades corporativas.</p>
+                    <p><strong>Atendimento em toda a região!</strong><br>De segunda a sexta, em horário comercial, estamos prontos para realizar suas entregas com rapidez e segurança.</p>
+                </div>
+                <div class="sobre-image">
+                    <img src="./jr.jpeg" alt="Entregas rápidas e seguras">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços -->
+    <section id="servicos">
+        <div class="container">
+            <h2 class="section-title">Nossos Serviços</h2>
+            <div class="servicos-grid">
+                <div class="servico-card">
+                    <div class="servico-icon"><i class="fas fa-truck"></i></div>
+                    <div class="servico-content"><h3>Entregas Rápidas</h3><p>Agilidade e pontualidade para suas entregas.</p></div>
+                </div>
+                <div class="servico-card">
+                    <div class="servico-icon"><i class="fas fa-file-alt"></i></div>
+                    <div class="servico-content"><h3>Documentos e Encomendas</h3><p>Transporte seguro de documentos e pacotes.</p></div>
+                </div>
+                <div class="servico-card">
+                    <div class="servico-icon"><i class="fas fa-hand-holding-box"></i></div>
+                    <div class="servico-content"><h3>Coletas e Delivery</h3><p>Coletamos no local e entregamos com eficiência.</p></div>
+                </div>
+                <div class="servico-card">
+                    <div class="servico-icon"><i class="fas fa-motorcycle"></i></div>
+                    <div class="servico-content"><h3>Logística Expressa</h3><p>Atendimento prioritário para urgências.</p></div>
+                </div>
+                <div class="servico-card">
+                    <div class="servico-icon"><i class="fas fa-boxes"></i></div>
+                    <div class="servico-content"><h3>Transporte de Cargas</h3><p>Veículos adequados para cargas de diferentes portes.</p></div>
+                </div>
+                <div class="servico-card">
+                    <div class="servico-icon"><i class="fas fa-calendar-week"></i></div>
+                    <div class="servico-content"><h3>Atendimento Comercial</h3><p>De segunda a sexta, em horário comercial.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Frota -->
+    <section id="frota">
+        <div class="container">
+            <h2 class="section-title">Nossa Frota</h2>
+            <div class="frota-grid">
+                <div class="frota-card">
+                    <div class="frota-image"><img src="https://www.jornalavozdomotoboy.com.br/images/noticias/1059/76f6315cef47012be59d815b240e6d76.webp" alt="Motos"></div>
+                    <div class="frota-content"><h3>Motocicletas</h3><p>Agilidade máxima para entregas expressas.</p></div>
+                </div>
+                <div class="frota-card">
+                    <div class="frota-image"><img src="https://s2-autoesporte.glbimg.com/0Bre2Y1KUrgTp8ltX65vMmIyVM4=/0x0:620x413/1000x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2020/r/v/YVQz9TTBiA1M5CyLtyDQ/2020-06-03-fiat-fiorino-2021-1.jpeg" alt="Utilitários"></div>
+                    <div class="frota-content"><h3>Veículos Utilitários</h3><p>Capacidade para cargas maiores e encomendas.</p></div>
+                </div>
+                <div class="frota-card">
+                    <div class="frota-image"><img src="https://cdn.prod.website-files.com/67d2cd7e700eb793f98a2e81/67d83412305cf405c7984e49_ia-frotas.jpg" alt="Frota moderna"></div>
+                    <div class="frota-content"><h3>Frota Moderna</h3><p>Segurança e eficiência em cada entrega.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diferenciais -->
+    <section id="diferenciais">
+        <div class="container diferenciais-content">
+            <h2>Diferenciais que Fazem a Diferença</h2>
+            <p>Agilidade • Segurança • Atendimento personalizado • Cobertura em toda a região • Horário comercial de segunda a sexta</p>
+            <a href="#contato" class="btn">Fale Conosco pelo WhatsApp</a>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato">
+        <div class="container">
+            <h2 class="section-title">Solicite seu serviço agora</h2>
+            <div class="contato-content">
+                <div class="contato-info">
+                    <div class="contato-item">
+                        <div class="contato-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div><h3>Região de Atendimento</h3><b>Atendemos em toda a região metropolitana e arredores.</b></div>
+                    </div>
+                    <div class="contato-item">
+                        <div class="contato-icon"><i class="fab fa-whatsapp"></i></div>
+                        <div><h3>WhatsApp</h3><a href="https://wa.me/5511954429758">(11) 95442-9758</a></div>
+                    </div>
+                    <div class="contato-item">
+                        <div class="contato-icon"><i class="fas fa-clock"></i></div>
+                        <div><h3>Horário de Funcionamento</h3><b>Segunda a Sexta: Horário Comercial (08h às 18h)</b></div>
+                    </div>
+                </div>
+                <div class="contato-form">
+                    <div class="form-status success" id="formSuccess"></div>
+                    <div class="form-status error" id="formError"></div>
+                    <form id="whatsappForm">
+                        <div class="form-group">
+                            <label for="nome">Nome Completo *</label>
+                            <input type="text" id="nome" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefone">Telefone/WhatsApp *</label>
+                            <input type="tel" id="telefone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="servico">Serviço desejado *</label>
+                            <select id="servico" class="form-control" required>
+                                <option value="" disabled selected>Selecione</option>
+                                <option>Entregas Rápidas</option>
+                                <option>Documentos e Encomendas</option>
+                                <option>Coletas e Delivery</option>
+                                <option>Logística Expressa</option>
+                                <option>Transporte de Cargas</option>
+                                <option>Outro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="mensagem">Mensagem adicional</label>
+                            <textarea id="mensagem" class="form-control" placeholder="Descreva sua necessidade..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-wpp" style="width:100%"><i class="fab fa-whatsapp"></i> Enviar via WhatsApp</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">Anderson <span>Express</span></div>
+                    <p>Entregas rápidas, seguras e eficientes. Atendimento em toda a região.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="#hero">Início</a></li>
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-whatsapp">
+                    <h3>Atendimento</h3>
+                    <a href="https://wa.me/5511954429758" target="_blank"><i class="fab fa-whatsapp"></i> Fale conosco</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Anderson Express. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botão flutuante WhatsApp -->
+    <a href="https://wa.me/5511954429758?text=Olá!%20Gostaria%20de%20informações%20sobre%20os%20serviços." class="floating-wpp" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Menu mobile
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+        menuToggle.addEventListener('click', () => mainNav.classList.toggle('active'));
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.addEventListener('click', () => mainNav.classList.remove('active'));
+        });
+
+        // Formulário que envia para WhatsApp
+        const form = document.getElementById('whatsappForm');
+        const successDiv = document.getElementById('formSuccess');
+        const errorDiv = document.getElementById('formError');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const nome = document.getElementById('nome').value.trim();
+            const telefone = document.getElementById('telefone').value.trim();
+            const servico = document.getElementById('servico').value;
+            const mensagem = document.getElementById('mensagem').value.trim();
+
+            if (!nome || !telefone || !servico) {
+                errorDiv.textContent = 'Por favor, preencha nome, telefone e serviço desejado.';
+                errorDiv.style.display = 'block';
+                successDiv.style.display = 'none';
+                setTimeout(() => errorDiv.style.display = 'none', 4000);
+                return;
+            }
+
+            // Monta o texto para o WhatsApp
+            let texto = `*Novo contato pelo site*%0A%0A`;
+            texto += `*Nome:* ${nome}%0A`;
+            texto += `*Telefone:* ${telefone}%0A`;
+            texto += `*Serviço:* ${servico}%0A`;
+            if (mensagem) texto += `*Mensagem:* ${mensagem}%0A`;
+            texto += `%0A*Origem:* Formulário do site Anderson Express`;
+
+            // Redireciona para o WhatsApp
+            const url = `https://wa.me/5511954429758?text=${texto}`;
+            window.open(url, '_blank');
+
+            // Limpa o formulário e mostra mensagem de sucesso
+            form.reset();
+            successDiv.textContent = 'Redirecionando para o WhatsApp...';
+            successDiv.style.display = 'block';
+            errorDiv.style.display = 'none';
+            setTimeout(() => successDiv.style.display = 'none', 4000);
+        });
+
+        // Formatação do campo telefone
+        const telInput = document.getElementById('telefone');
+        telInput.addEventListener('input', () => {
+            let v = telInput.value.replace(/\D/g, '');
+            if (v.length > 10) telInput.value = v.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+            else if (v.length > 6) telInput.value = v.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+            else if (v.length > 2) telInput.value = v.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+            else telInput.value = v;
+        });
+    </script>
+</body>
+</html>
